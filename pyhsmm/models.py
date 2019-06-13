@@ -302,7 +302,7 @@ class _HMMBase(Model):
         # TODO this is a special-case hack. breaks for 1D obs. only looks at
         # first two components of ND obs.
         # should only do this if the obs collection has a 2D_feature method
-        ax = ax if ax else plt.gca()
+        ax = ax if ax else plt.gca(projection='3d')
         state_colors = state_colors if state_colors else self._get_colors()
 
         artists = []
@@ -314,7 +314,7 @@ class _HMMBase(Model):
                 s._data_scatter.set_offsets(data[:,:2])
                 s._data_scatter.set_color(colorseq)
             else:
-                s._data_scatter = Axes3D.scatter(data[:,0],data[:,1],data[:,2],c=colorseq,s=5)
+                s._data_scatter = ax.scatter(data[:,0],data[:,1],data[:,2],c=colorseq,s=5)
             artists.append(s._data_scatter)
 
         return artists
