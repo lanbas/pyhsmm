@@ -12,6 +12,7 @@ from matplotlib.gridspec import GridSpec, GridSpecFromSubplotSpec
 from matplotlib import cm
 from warnings import warn
 from scipy.misc import logsumexp
+from mpl_toolkits.mplot3d import Axes3D
 
 from pyhsmm.basic.abstractions import Model, ModelGibbsSampling, \
     ModelEM, ModelMAPEM, ModelMeanField, ModelMeanFieldSVI, ModelParallelTempering
