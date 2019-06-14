@@ -276,13 +276,13 @@ class _HMMBase(Model):
             if len(self.states_list) <= 2:
                 gs = GridSpec(sz+len(self.states_list),1)
 
-                feature_ax = plt.subplot(gs[:sz,:], projection='3d')
+                feature_ax = plt.subplot(gs[:sz,:])
                 stateseq_axs = [plt.subplot(gs[sz+idx]) for idx in range(len(self.states_list))]
             else:
                 gs = GridSpec(1,2)
                 sgs = GridSpecFromSubplotSpec(len(self.states_list),1,subplot_spec=gs[1])
 
-                feature_ax = plt.subplot(gs[0], projection='3d')
+                feature_ax = plt.subplot(gs[0])
                 stateseq_axs = [plt.subplot(sgs[idx]) for idx in range(len(self.states_list))]
 
             for ax in stateseq_axs:
