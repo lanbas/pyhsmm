@@ -319,7 +319,7 @@ class _HMMBase(Model):
 
         return artists
     
-     def plot_observations(self,ax=None,color=None,plot_slice=slice(None),update=False):
+    def plot_observations(self,ax=None,color=None,plot_slice=slice(None),update=False):
         ax = ax if ax else plt.gca()
         state_colors = self._get_colors(color)
         scatter_artists = self._plot_2d_data_scatter(ax,state_colors,plot_slice,update)
