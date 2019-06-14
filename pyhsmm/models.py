@@ -291,14 +291,14 @@ class _HMMBase(Model):
             fig._feature_ax, fig._stateseq_axs = feature_ax, stateseq_axs
             return feature_ax, stateseq_axs
 
-    def plot_observations(self,ax=None,color=None,plot_slice=slice(None),update=False):
+    def plot_observations_3d(self,ax=None,color=None,plot_slice=slice(None),update=False):
         ax = ax if ax else plt.gca(projection='3d')
         state_colors = self._get_colors(color)
-        scatter_artists = self._plot_2d_data_scatter(ax,state_colors,plot_slice,update)
+        scatter_artists = self._plot_3d_data_scatter(ax,state_colors,plot_slice,update)
         param_artists = self._plot_2d_obs_params(ax,state_colors,update)
         return scatter_artists + param_artists
 
-    def _plot_2d_data_scatter(self,ax=None,state_colors=None,plot_slice=slice(None),update=False):
+    def _plot_3d_data_scatter(self,ax=None,state_colors=None,plot_slice=slice(None),update=False):
         # TODO this is a special-case hack. breaks for 1D obs. only looks at
         # first two components of ND obs.
         # should only do this if the obs collection has a 2D_feature method
@@ -315,6 +315,34 @@ class _HMMBase(Model):
                 s._data_scatter.set_color(colorseq)
             else:
                 s._data_scatter = ax.scatter(data[:,0],data[:,1],data[:,2],c=colorseq,s=5)
+            artists.append(s._data_scatter)
+
+        return artists
+    
+     def plot_observations(self,ax=None,color=None,plot_slice=slice(None),update=False):
+        ax = ax if ax else plt.gca()
+        state_colors = self._get_colors(color)
+        scatter_artists = self._plot_2d_data_scatter(ax,state_colors,plot_slice,update)
+        param_artists = self._plot_2d_obs_params(ax,state_colors,update)
+        return scatter_artists + param_artists
+
+    def _plot_2d_data_scatter(self,ax=None,state_colors=None,plot_slice=slice(None),update=False):
+        # TODO this is a special-case hack. breaks for 1D obs. only looks at
+        # first two components of ND obs.
+        # should only do this if the obs collection has a 2D_feature method
+        ax = ax if ax else plt.gca()
+        state_colors = state_colors if state_colors else self._get_colors()
+
+        artists = []
+        for s, data in zip(self.states_list,self.datas):
+            data = data[plot_slice]
+            colorseq = [state_colors[state] for state in s.stateseq[plot_slice]]
+
+            if update and hasattr(s,'_data_scatter'):
+                s._data_scatter.set_offsets(data[:,:2])
+                s._data_scatter.set_color(colorseq)
+            else:
+                s._data_scatter = ax.scatter(data[:,0],data[:,1],c=colorseq,s=5)
             artists.append(s._data_scatter)
 
         return artists
