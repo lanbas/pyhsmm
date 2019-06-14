@@ -302,7 +302,7 @@ class _HMMBase(Model):
         # TODO this is a special-case hack. breaks for 1D obs. only looks at
         # first two components of ND obs.
         # should only do this if the obs collection has a 2D_feature method
-        ax = ax if ax else plt.gca(projection='3d')
+        ax = ax if ax else Axes3D(plt.gca())
         state_colors = state_colors if state_colors else self._get_colors()
 
         artists = []
