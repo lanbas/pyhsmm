@@ -276,13 +276,13 @@ class _HMMBase(Model):
             if len(self.states_list) <= 2:
                 gs = GridSpec(sz+len(self.states_list),1)
 
-                feature_ax = plt.add_subplot(gs[:sz,:], projection='3d')
+                feature_ax = plt.subplot(gs[:sz,:], projection='3d')
                 stateseq_axs = [plt.subplot(gs[sz+idx]) for idx in range(len(self.states_list))]
             else:
                 gs = GridSpec(1,2)
                 sgs = GridSpecFromSubplotSpec(len(self.states_list),1,subplot_spec=gs[1])
 
-                feature_ax = plt.add_subplot(gs[0], projection='3d')
+                feature_ax = plt.subplot(gs[0], projection='3d')
                 stateseq_axs = [plt.subplot(sgs[idx]) for idx in range(len(self.states_list))]
 
             for ax in stateseq_axs:
@@ -292,7 +292,7 @@ class _HMMBase(Model):
             return feature_ax, stateseq_axs
 
     def plot_observations(self,ax=None,color=None,plot_slice=slice(None),update=False):
-        ax = ax if ax else plt.gca()
+        ax = ax if ax else plt.gca(projection='3d')
         state_colors = self._get_colors(color)
         scatter_artists = self._plot_2d_data_scatter(ax,state_colors,plot_slice,update)
         param_artists = self._plot_2d_obs_params(ax,state_colors,update)
@@ -302,7 +302,7 @@ class _HMMBase(Model):
         # TODO this is a special-case hack. breaks for 1D obs. only looks at
         # first two components of ND obs.
         # should only do this if the obs collection has a 2D_feature method
-        ax = ax if ax else plt.gca()
+        ax = ax if ax else plt.gca(projection='3d')
         state_colors = state_colors if state_colors else self._get_colors()
 
         artists = []
