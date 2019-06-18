@@ -315,6 +315,7 @@ class _HMMBase(Model):
                 s._data_scatter.set_color(colorseq)
             else:
                 s._data_scatter = ax.scatter(data[:,0],data[:,1],data[:,2],c=colorseq,s=5)
+                plt.pause(0.1)
             artists.append(s._data_scatter)
 
         return artists
