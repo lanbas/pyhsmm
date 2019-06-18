@@ -320,7 +320,7 @@ class _HMMBase(Model):
                 s._data_scatter = ax.scatter(x, y, z, s=5)
                 
                 plt.draw()
-                for i in range(len(data))
+                for i in range(len(data)):
                     x.append(data[:,0])
                     y.append(data[:,1])
                     z.append(data[:,2])
