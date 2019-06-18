@@ -314,19 +314,18 @@ class _HMMBase(Model):
                 s._data_scatter.set_offsets(data[:,:2])
                 s._data_scatter.set_color(colorseq)
             else:
-                plt.ion()
                 x, y, z = [], [], []
                 s._data_scatter = ax.scatter(x, y, z, s=5)
-                plt.draw()
-                for i in range(len(data)):
+
+                def animate(i):
                     x.append(data[:,0])
                     y.append(data[:,1])
                     z.append(data[:,2])
                     s._data_scatter.set_offsets(np.c_[x, y, z])
-                    ax.canvas.draw_idle()
-                    plt.pause(0.1)
 
-                plt.waitforbuttonpress()
+                ani = animation.FuncAnimation(ax, animate,
+                                                     frames=2, interval=100, repeat=True)
+                plt.show()
             artists.append(s._data_scatter)
 
         return artists
