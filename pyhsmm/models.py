@@ -3,6 +3,7 @@ from future.utils import iteritems, itervalues
 from builtins import map, zip
 
 import numpy as np
+import matplotlib.animation as animation
 import itertools
 import collections
 import operator
