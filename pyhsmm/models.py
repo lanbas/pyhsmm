@@ -305,7 +305,7 @@ class _HMMBase(Model):
         # should only do this if the obs collection has a 2D_feature method
         ax = ax if ax else plt.gca(projection='3d')
         state_colors = state_colors if state_colors else self._get_colors()
-        fig = plt.subplot()
+        fig = plt.subplots()
         artists = []
         for s, data in zip(self.states_list,self.datas):
             data = data[plot_slice]
