@@ -316,7 +316,7 @@ class _HMMBase(Model):
             else:
                 plt.ion()
                 x, y, z = [], [], []
-                s._data_scatter = ax.scatter(x, y, z, c=colorseq, s=5)
+                s._data_scatter = ax.scatter(x, y, z, s=5)
                 plt.draw()
                 for i in range(len(data)):
                     x.append(data[:,0])
