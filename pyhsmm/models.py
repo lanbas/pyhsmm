@@ -305,7 +305,7 @@ class _HMMBase(Model):
         # should only do this if the obs collection has a 2D_feature method
         ax = ax if ax else plt.gca(projection='3d')
         state_colors = state_colors if state_colors else self._get_colors()
-
+        fig = plt.subplot()
         artists = []
         for s, data in zip(self.states_list,self.datas):
             data = data[plot_slice]
@@ -324,7 +324,7 @@ class _HMMBase(Model):
                     z.append(data[:,2])
                     s._data_scatter.set_offsets(np.c_[x, y, z])
 
-                ani = animation.FuncAnimation(ax, animate,
+                ani = animation.FuncAnimation(fig, animate,
                                                      frames=2, interval=100, repeat=True)
                 plt.show()
             artists.append(s._data_scatter)
