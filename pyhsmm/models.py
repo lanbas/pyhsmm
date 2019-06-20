@@ -353,7 +353,7 @@ class _HMMBase(Model):
                     x.append(data[:,0])
                     y.append(data[:,1])
                     s._data_scatter.set_offsets(np.c_[x,y])
-                    fig.canvas.draw_idle()
+                    plt.draw()
                     plt.pause(0.1)
 
                 plt.waitforbuttonpress()
