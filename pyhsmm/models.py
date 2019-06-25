@@ -378,7 +378,7 @@ class _HMMBase(Model):
         return artists
 
     def _get_colors(self,color=None,scalars=False,color_method=None):
-        color_method = color_method if color_method else 'usage'
+        color_method = color_method if color_method else 'order'
         if color is None:
             cmap = cm.get_cmap()
 
