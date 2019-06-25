@@ -392,7 +392,7 @@ class _HMMBase(Model):
 
             unused_states = [idx for idx in range(self.num_states) if idx not in used_states]
 
-            colorseq = np.random.RandomState(0).permutation(np.linspace(0,1,self.num_states))
+            colorseq = np.linspace(0,1,self.num_states)
             print(colorseq)
             colors = dict((idx, v if scalars else cmap(v)) for idx, v in zip(used_states,colorseq))
 
