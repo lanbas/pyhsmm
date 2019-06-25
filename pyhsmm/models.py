@@ -395,7 +395,6 @@ class _HMMBase(Model):
 
             colorseq = np.linspace(0,1,self.num_states)
             colors = dict((idx, v if scalars else cmap(v)) for idx, v in zip(used_states,colorseq))
-            print(colors)
             for state in unused_states:
                 colors[state] = cmap(1.)
 
