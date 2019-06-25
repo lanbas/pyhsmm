@@ -378,7 +378,7 @@ class _HMMBase(Model):
         return artists
 
     def _get_colors(self,color=None,scalars=False,color_method=None):
-        color_method = color_method if color_method else 'usage'
+        color_method = color_method if color_method else 'order'
         if color is None:
             cmap = cm.get_cmap()
 
@@ -393,9 +393,8 @@ class _HMMBase(Model):
             unused_states = [idx for idx in range(self.num_states) if idx not in used_states]
 
             colorseq = np.linspace(0,1,self.num_states)
-            print(colorseq)
             colors = dict((idx, v if scalars else cmap(v)) for idx, v in zip(used_states,colorseq))
-
+            print(colors)
             for state in unused_states:
                 colors[state] = cmap(1.)
 
