@@ -382,13 +382,13 @@ class _HMMBase(Model):
         if color is None:
             cmap = cm.get_cmap()
 
-            if color_method == 'usage':
-                freqs = self.state_usages
-                used_states = sorted(self.used_states, key=lambda x: freqs[x], reverse=True)
-            elif color_method == 'order':
-                used_states = self.used_states
-            else:
-                raise ValueError("color_method must be 'usage' or 'order'")
+            #if color_method == 'usage':
+             #   freqs = self.state_usages
+              #  used_states = sorted(self.used_states, key=lambda x: freqs[x], reverse=True)
+            #elif color_method == 'order':
+            used_states = self.used_states
+            #else:
+                #raise ValueError("color_method must be 'usage' or 'order'")
 
             unused_states = [idx for idx in range(self.num_states) if idx not in used_states]
 
