@@ -390,6 +390,7 @@ class _HMMBase(Model):
             else:
                 raise ValueError("color_method must be 'usage' or 'order'")
 
+            used_states.sort()
             unused_states = [idx for idx in range(self.num_states) if idx not in used_states]
 
             colorseq = np.linspace(0,1,self.num_states)
