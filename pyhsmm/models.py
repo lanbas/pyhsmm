@@ -301,24 +301,23 @@ class _HMMBase(Model):
     
     def animated_plot(self):
         data_to_plot = self.datas[0]
-        plt.ion()
         fig = plt.figure()
         ax = Axes3D(fig)
         x,y,z = [],[],[]
-        sc = ax.scatter(x, y, z)
+        sc = ax.scatter(x, y, z, linewidths=0, s=18)
         ax.set_xlim(0,20)
         ax.set_ylim(0,21)
         ax.set_zlim(-5,5)
-        plt.draw()
-
-        for dot in data_to_plot:
-            x.append(dot[0])
-            y.append(dot[1])
-            z.append(dot[2])
+        
+        def animate(self, i):
+            x.append(data_to_plot[i+1][0])
+            y.append(data_to_plot[i+1][1])
+            z.append(data_to_plot[i+1][2])
             sc._offsets3d = (x, y, z)
-            sc.set_array(model.stateseqs[0])
-            fig.canvas.draw_idle()
-            plt.pause(0.0000000000001)
+            sc.set_array(self.stateseqs[0])
+        
+        ani = animation.FuncAnimation(fig, animate, frames=35000, interval=1, repeat=True)
+        plt.show()
 
     def _plot_3d_data_scatter(self,ax=None,state_colors=None,plot_slice=slice(None),update=False):
         # TODO this is a special-case hack. breaks for 1D obs. only looks at
