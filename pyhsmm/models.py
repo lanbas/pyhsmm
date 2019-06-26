@@ -298,6 +298,27 @@ class _HMMBase(Model):
         scatter_artists = self._plot_3d_data_scatter(ax,state_colors,plot_slice,update)
         param_artists = self._plot_2d_obs_params(ax,state_colors,update)
         return scatter_artists + param_artists
+    
+    def animated_plot(self):
+        data_to_plot = model.datas[0]
+        plt.ion()
+        fig = plt.figure(3)
+        ax = Axes3D(fig)
+        x,y,z = [],[],[]
+        sc = ax.scatter(x, y, z)
+        ax.set_xlim(0,20)
+        ax.set_ylim(0,21)
+        ax.set_zlim(-5,5)
+        plt.draw()
+
+        for dot in data_to_plot:
+            x.append(dot[0])
+            y.append(dot[1])
+            z.append(dot[2])
+            sc._offsets3d = (x, y, z)
+            sc.set_array(model.stateseqs[0])
+            fig.canvas.draw_idle()
+            plt.pause(0.0000000000001)
 
     def _plot_3d_data_scatter(self,ax=None,state_colors=None,plot_slice=slice(None),update=False):
         # TODO this is a special-case hack. breaks for 1D obs. only looks at
