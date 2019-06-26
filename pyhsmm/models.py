@@ -300,9 +300,9 @@ class _HMMBase(Model):
         return scatter_artists + param_artists
     
     def animated_plot(self):
-        data_to_plot = model.datas[0]
+        data_to_plot = self.datas[0]
         plt.ion()
-        fig = plt.figure(3)
+        fig = plt.figure()
         ax = Axes3D(fig)
         x,y,z = [],[],[]
         sc = ax.scatter(x, y, z)
