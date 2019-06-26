@@ -301,7 +301,6 @@ class _HMMBase(Model):
     
     def animated_plot(self, fig):
         data_to_plot = self.datas[0]
-        #fig = plt.figure()
         ax = Axes3D(fig)
         x,y,z = [],[],[]
         sc = ax.scatter(x, y, z, linewidths=0, s=18)
@@ -318,6 +317,32 @@ class _HMMBase(Model):
         
         ani = animation.FuncAnimation(fig, animate, frames=35000, interval=1, repeat=True)
         plt.show()
+        
+    def states_scroll(self, colors):
+        times = np.linspace(0, len(test_input) - 1, len(test_input))
+        input_df = pd.DataFrame(data=test_input)
+        input_df['Times'] = times
+
+        # Highlighting graph, test_output is the array of states
+        front = 0
+        end = 0
+        xmin = 0
+        while end < len(test_output):
+            if end > 2000:
+                xmin += 1
+                ax.set_xlim(left=xmin, right=end) # Makes graph scroll after 2000 observations
+            if end == 0:
+                end += 1
+                continue
+            elif test_output[end] != test_output[end - 1]:
+                plt.axvspan(front, end, color=colors[test_output[end-1]], alpha=0.4)
+                plt.plot(input_df['Times'].values[front:end], test_input[front:end], color=colors[test_output[end-1]], linewidth=0.55)
+                plt.pause(0.01)
+                front = end
+                end += 1
+            else:
+                end += 1
+        
 
     def _plot_3d_data_scatter(self,ax=None,state_colors=None,plot_slice=slice(None),update=False):
         # TODO this is a special-case hack. breaks for 1D obs. only looks at
