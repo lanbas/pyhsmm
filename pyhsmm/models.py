@@ -323,6 +323,7 @@ class _HMMBase(Model):
         times = np.linspace(0, len(test_input) - 1, len(test_input))
         input_df = pd.DataFrame(data=test_input)
         input_df['Times'] = times
+        ax = plt.gca()
 
         # Highlighting graph, test_output is the array of states
         front = 0
