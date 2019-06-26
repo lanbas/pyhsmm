@@ -309,7 +309,7 @@ class _HMMBase(Model):
         ax.set_ylim(0,21)
         ax.set_zlim(-5,5)
         
-        def animate(self, i):
+        def animate(i):
             x.append(data_to_plot[i+1][0])
             y.append(data_to_plot[i+1][1])
             z.append(data_to_plot[i+1][2])
