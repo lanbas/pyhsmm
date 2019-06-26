@@ -318,7 +318,7 @@ class _HMMBase(Model):
         ani = animation.FuncAnimation(fig, animate, frames=35000, interval=1, repeat=True)
         plt.show()
         
-    def states_scroll(self, colors):
+    def states_scroll(self, colors, test_input, test_output):
         times = np.linspace(0, len(test_input) - 1, len(test_input))
         input_df = pd.DataFrame(data=test_input)
         input_df['Times'] = times
