@@ -4,6 +4,7 @@ from builtins import map, zip
 
 import numpy as np
 import matplotlib.animation as animation
+import pandas as pd
 import itertools
 import collections
 import operator
